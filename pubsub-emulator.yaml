@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcp-emulator-deployment
+  labels:
+    app: pubsub
+  namespace: pubsub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pubsub
+  template:
+    metadata:
+      labels:
+        app: pubsub
+    spec:
+      containers:
+        - name: pubsub-emulator
+          image: gcr.io/google.com/cloudsdktool/cloud-sdk:emulators
+          command: ["gcloud", "beta", "emulators", "pubsub", "start"]
+          args: ["--project=local", "--host-port=0.0.0.0:8085"]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pubsub-service
+  namespace: pubsub
+spec:
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8008
+      targetPort: 8085
+      nodePort: 31778 ## not necessary as it will be assigned automatically, use a value if you want to specify a port
+  selector:
+    app: pubsub
