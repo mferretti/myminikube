@@ -1,5 +1,3 @@
-Collecting workspace information
-
 # Minikube Development Environment
 
 This repository contains scripts and Kubernetes configurations to set up a local development environment using Minikube with various services.
