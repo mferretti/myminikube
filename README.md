@@ -43,16 +43,12 @@ This repository contains scripts and Kubernetes configurations to set up a local
 - Ubuntu-based debugging container
 - For troubleshooting cluster issues
 
-#### PubSub Emulator [`pubsub-emulator.yaml`](pubsub-emulator.yaml))
+#### PubSub Emulator ([`pubsub-emulator.yaml`](pubsub-emulator.yaml))
 - Google Cloud PubSub emulator
 - Port: 31778
 - Resource limits: 200m CPU, 200Mi memory
 
-#### Kubernetes Dashboard (
-
-minikube-dashboard-ingress.yaml
-
-)
+#### Kubernetes Dashboard ([`minikube-dashboard-ingress.yaml`](minikube-dashboard-ingress.yaml)
 - Access via `minikube.test` hostname
 
 ### Optional Components
