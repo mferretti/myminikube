@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: registry-ca-trust
+  namespace: registry
+spec:
+  selector:
+    matchLabels:
+      app: registry-ca-trust
+  template:
+    metadata:
+      labels:
+        app: registry-ca-trust
+    spec:
+      containers:
+      - name: ca-trust
+        image: alpine:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apk add --no-cache ca-certificates
+          cp /etc/ssl/certs/registry-ca.crt /usr/local/share/ca-certificates/
+          update-ca-certificates
+        volumeMounts:
+        - name: registry-ca
+          mountPath: /etc/ssl/certs/registry-ca.crt
+          subPath: ca.crt
+        - name: host-ca-store
+          mountPath: /etc/ssl/certs
+      volumes:
+      - name: registry-ca
+        configMap:
+          name: registry-ca
+      - name: host-ca-store
+        hostPath:
+          path: /etc/ssl/certs
+      hostNetwork: true
+      hostPID: true

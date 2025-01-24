@@ -64,7 +64,14 @@
    kubectl logs -n registry po/registry-test
    ```
 
-
+9. Create Configmap
+   ```bash
+   kubectl create configmap registry-ca -n registry --from-file=ca.crt
+   ```
+10. Use a DaemonSet to distribute the CA certificate to all nodes
+   ```bash
+   kubectl apply -f daemonset.yaml 
+   ```
 
 ## Post-Installation
 - Registry accessible at `registry.test`

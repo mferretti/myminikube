@@ -23,6 +23,45 @@ data:
     validation:
       disabled: true
 ---
+apiVersion: apps/v1
+kind: Pod
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  containers:
+  - name: registry
+    image: registry:2
+    volumeMounts:
+    - name: registry-config
+      mountPath: /etc/docker/registry
+    ports:
+    - containerPort: 5000
+    resources:
+      requests:
+        memory: "128Mi"
+        cpu: "100m"
+      limits:
+        memory: "256Mi"
+        cpu: "200m"
+  volumes:
+  - name: registry-config
+    configMap:
+      name: registry-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: registry
+  namespace: registry
+spec:
+  selector:
+    app: registry
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
