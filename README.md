@@ -46,7 +46,7 @@ This repository contains scripts and Kubernetes configurations to set up a local
 - Port: 31778
 - Resource limits: 200m CPU, 200Mi memory
 
-#### Kubernetes Dashboard ([`minikube-dashboard-ingress.yaml`](minikube-dashboard-ingress.yaml)
+#### Kubernetes Dashboard ([`minikube-dashboard-ingress.yaml`](minikube-dashboard-ingress.yaml))
 - Access via `minikube.test` hostname
 
 ### Optional Components
@@ -54,7 +54,8 @@ This repository contains scripts and Kubernetes configurations to set up a local
 #### SonarQube
 - Follow the [sonar-minikube installation guide](https://github.com/mferretti/sonar-minikube) to add SonarQube to your cluster
 
-
+#### Internal docker registry
+- Follow the [Internal Docker Registry Setup](./registry/README.md) guide to add an accessible docker registry to your cluster 
 ## Utility Scripts
 
 - 
