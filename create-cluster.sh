@@ -66,7 +66,7 @@ fi
 
 metrics_server=`minikube addons list -p $NAME | grep "enabled" | grep -c "metrics-server"`
 ingress=`minikube addons list -p $NAME | grep "enabled" | grep -c "ingress"`
-dashboard=`minikube addons list -p $NAME | grep "enabled" | grep -c "dashboard"`
+dashboard=`minikube addons list -p $NAME | grep "enabled" | grep -c "yakd"`
 
 if [ $metrics_server == 0 ]; then
     echo "metrics-server not enabled; enabling it"
@@ -84,7 +84,7 @@ fi
 
 if [ $dashboard == 0 ]; then
     echo "dashboard not enabled; enabling it"
-    minikube addons enable dashboard -p $NAME
+    minikube addons enable yakd -p $NAME
 else
     echo "dashboard already enabled"
 fi
