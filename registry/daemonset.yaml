@@ -20,14 +20,24 @@ spec:
         - -c
         - |
           apk add --no-cache ca-certificates
-          cp /etc/ssl/certs/registry-ca.crt /usr/local/share/ca-certificates/
-          update-ca-certificates
+          while true; do
+            cp /etc/ssl/certs/registry-ca.crt /usr/local/share/ca-certificates/
+            update-ca-certificates
+            sleep 300
+          done
         volumeMounts:
         - name: registry-ca
           mountPath: /etc/ssl/certs/registry-ca.crt
           subPath: ca.crt
         - name: host-ca-store
           mountPath: /etc/ssl/certs
+        resources:
+          limits:
+            cpu: 50m
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 32Mi
       volumes:
       - name: registry-ca
         configMap:
