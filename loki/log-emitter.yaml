@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-logger
+  namespace: loki-stack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logger
+  template:
+    metadata:
+      labels:
+        app: logger
+    spec:
+      containers:
+      - name: logger
+        image: busybox
+        command: [ "sh", "-c", "while true; do echo '{\"message\": \"Hello from the logger\"}'; sleep 5; done;" ]
