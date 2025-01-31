@@ -120,3 +120,10 @@ Follow these steps to create a basic Grafana dashboard:
 
 You now have a basic Grafana dashboard that monitors logs from your example deployment.
 
+## Reading StackDriver logs
+In case you need to test applications that use Stack Driver Json Layout format alreay, one simple way to extract all the variables in the Grafana Logs Explorer is 
+```
+{app="yourappname"} |= `` | json | line_format "{{.log}}" | json | unpack 
+```
+
+This will parse the value `log` of your log file, pass it to a json digester and export all the variables to filterable fields
