@@ -1,10 +1,77 @@
+# Enable and configure Loki component
 loki:
   enabled: true
+  # Define the initial storage size for Loki
   size: 1Gi
+  config:
+    compactor:
+      # Enable the compactor's retention capabilities
+      # This allows Loki to actually delete old data
+      retention_enabled: true
+
+    limits_config:
+      # How long to retain log data
+      # Logs older than this will be deleted
+      retention_period: 24h
+
+      # Allow ingestion of logs that are up to this old
+      # Useful for system restarts or temporary network issues
+      creation_grace_period: 6h
+
+      # Don't require metric names
+      # Helpful for logs that don't follow a strict format
+      enforce_metric_name: false
+
+      # Reject logs that are too old at ingestion time
+      reject_old_samples: true
+      # Maximum age of logs that will be accepted
+      reject_old_samples_max_age: 24h
+
+    table_manager:
+      # Enable deletion of old indexes
+      retention_deletes_enabled: true
+      # How long to keep indexes
+      retention_period: 24h
+
+    chunk_store_config:
+      # How far back queries can look
+      # Should match your retention period
+      max_look_back_period: 24h
+
+    # Configuration for how Loki stores its data
+    schema_config:
+      configs:
+      - from: "2023-01-01"
+        # Use boltdb-shipper for index storage
+        store: boltdb-shipper
+        # Use local filesystem for storing chunks
+        object_store: filesystem
+        # Use v11 schema (current as of early 2024)
+        schema: v11
+        index:
+          # Prefix for index files
+          prefix: index_
+          # How frequently to create new index files
+          # Should be less than or equal to retention period
+          period: 24h
+
+  # Configure persistent storage for Loki
+  persistence:
+    enabled: true
+    # Size of the persistent volume
+    size: 1Gi
+    # Storage class to use
+    # "standard" is typically the default in Minikube
+    storageClassName: "standard"
+
+# Enable and configure Promtail for log collection
 promtail:
   enabled: true
+
+# Enable and configure Grafana for log visualization
 grafana:
   enabled: true
   sidecar:
+    # Enable automatic datasource configuration
     datasources:
       enabled: true
