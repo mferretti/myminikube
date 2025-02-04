@@ -28,6 +28,8 @@ kind: Pod
 metadata:
   name: registry
   namespace: registry
+  labels:
+    app: registry
 spec:
   containers:
   - name: registry
