@@ -1,2 +1,12 @@
 
 loki/grafana-agent-values copy.yaml
+
+registry/ca.crt
+
+registry/ca.key
+
+registry/tls.crt
+
+registry/tls.csr
+
+registry/tls.key
