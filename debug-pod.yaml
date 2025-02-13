@@ -29,5 +29,5 @@ spec:
         # Installs common debugging tools at runtime
         # If you prefer them already installed, create a custom Dockerfile
         # with RUN apk add ...
-        args: [ "-c", "apk add --no-cache bash curl iproute2 iputils bind-tools netcat-openbsd net-tools && sleep 604800" ]
+        args: [ "-c", "apk add --no-cache bash curl iproute2 iputils bind-tools netcat-openbsd net-tools mysql-client postgresql-client && sleep 604800" ]
       # restartPolicy: Always
