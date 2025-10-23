@@ -26,5 +26,11 @@ This directory contains Kubernetes manifests to deploy a lightweight Gitea Git s
 - Ingress assumes your system resolves `git.test` to Minikube.
 - For test purposes, default settings are used. Adjust manifests for production use.
 
+- If you encounter an error like `HTTP 413 Payload Too Large` when pushing to Gitea (e.g., `error: RPC failed; HTTP 413 curl 22 The requested URL returned error: 413`), increase the allowed upload size by adding the following annotation to your Ingress manifest:
+   ```yaml
+   nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+   ```
+   This sets the maximum allowed request body size to 100MB. Adjust the value as needed for your use case.
+
 ---
 For questions or improvements, open an issue or PR in this repository.
