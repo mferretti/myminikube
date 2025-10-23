@@ -51,14 +51,18 @@ This repository contains scripts and Kubernetes configurations to set up a local
 
 ### Optional Components
 
+
+#### Gitea Git Server
+Follow the [Gitea Git Server Setup](./git/README.md) guide to add a lightweight, persistent Git server to your cluster.
+
 #### SonarQube
-- Follow the [sonar-minikube installation guide](https://github.com/mferretti/sonar-minikube) to add SonarQube to your cluster
+Follow the [sonar-minikube installation guide](https://github.com/mferretti/sonar-minikube) to add SonarQube to your cluster
 
 #### Internal docker registry
-- Follow the [Internal Docker Registry Setup](./registry/README.md) guide to add an accessible docker registry to your cluster 
+Follow the [Internal Docker Registry Setup](./registry/README.md) guide to add an accessible docker registry to your cluster 
 
 #### Observability
-- Follow the [Loki + Grafana Stack Deployment](./loki/README.md) guide to add loki + promtail + grafana to your cluster
+Follow the [Loki + Grafana Stack Deployment](./loki/README.md) guide to add loki + promtail + grafana to your cluster
 
 ## Utility Scripts
 - disable-ingress-dns.sh : Disables ingress-dns addon
