@@ -5,6 +5,7 @@ metadata:
   namespace: git
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: "500m"
 spec:
   rules:
   - host: git.test
